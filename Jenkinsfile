@@ -1,6 +1,11 @@
 pipeline {
     agent any
     stages { 
+	stage('requirements') {
+            steps {
+                sh 'pip3 install -r requirements.txt'
+            }
+        }
         stage('tests') {
             steps {
                 sh '''
