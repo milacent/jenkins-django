@@ -1,21 +1,19 @@
 pipeline {
     agent any
-    stages { 
-	stage('requirements') {
+    stages {
+        stage('install requirements') {
             steps {
-                sh 'pip3 install -r requirements.txt'
+                sh 'pip3 install --break-system-packages -r requirements.txt'
             }
         }
         stage('tests') {
             steps {
-                sh '''
-                    python3 manage.py test --verbosity=2
-                '''
+                sh 'python3 manage.py test --verbosity=2'
             }
         }
-        stage("hello") {
+        stage('hello') {
             steps {
-                echo "Hello world!"
+                echo 'Hello world!'
             }
         }
     }
