@@ -9,4 +9,4 @@
 3. Создать multibranch pipeline в jenkins с этим репозиторием
 4. Настройте запуск по webhook
 
-## Webhook Test
+## Webhook test
