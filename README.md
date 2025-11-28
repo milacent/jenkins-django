@@ -8,3 +8,5 @@
 2. Добавить Jenkinsfile с одним stage, который запускает тесты на джангу
 3. Создать multibranch pipeline в jenkins с этим репозиторием
 4. Настройте запуск по webhook
+
+## Webhook Test
