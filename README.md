@@ -10,4 +10,4 @@
 4. Настройте запуск по webhook
 
 ## Webhook test 2
-## Jenkins SSH test
+## Jenkins SSH test2
