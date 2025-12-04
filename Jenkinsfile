@@ -4,7 +4,6 @@ pipeline {
         stage('install requirements') {
             steps {
                 sh 'pip3 install --break-system-packages -r requirements.txt'
-		sh 'pip3 install --break-system-packages coverage'
             }
         }
         stage('tests') {
