@@ -8,12 +8,12 @@ pipeline {
             }
         }
         stage('tests') {
-            steps {
-                sh 'python3 manage.py test --verbosity=2'
-		sh 'coverage report'
-                sh 'coverage html'
-            }
-        }
+    		steps {
+			sh "python3 -m coverage run --source='.' manage.py test --verbosity=2"
+			sh 'python3 -m coverage report'
+			sh 'python3 -m coverage html'
+		    }
+		}
 	stage('artifacts') {
             steps {
                 archiveArtifacts artifacts: 'htmlcov/**'
