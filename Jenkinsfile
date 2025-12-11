@@ -1,40 +1,21 @@
 pipeline {
     agent any
     stages {
-        stage('install requirements') {
+        stage('build') {
             steps {
-                sh 'pip3 install --break-system-packages -r requirements.txt'
+                sh 'docker build -t django-app .'
             }
         }
         stage('tests') {
-    		steps {
-			sh "python3 -m coverage run --source='.' manage.py test --verbosity=2"
-			sh 'python3 -m coverage report'
-			sh 'python3 -m coverage html'
-		    }
-		}
-	stage('artifacts') {
             steps {
-                archiveArtifacts artifacts: 'htmlcov/**'
+                sh 'docker run --rm django-app python -m coverage run --source=. manage.py test --verbosity=2'
+                sh 'docker run --rm django-app python -m coverage report'
+                sh 'docker run --rm django-app python -m coverage html'
             }
         }
-        stage('hello') {
+        stage('deploy') {
             steps {
-                echo 'Hello world!'
-            }
-        }
-	stage('migrate') {
-            steps {
-                sh 'python3 manage.py makemigrations'
-                sh 'python3 manage.py migrate'
-            }
-        }
-        stage('run app') {
-            steps {
-                sh '''
-		    python3 manage.py migrate
-                    python3 manage.py runserver 0.0.0.0:8001
-                '''
+                sh 'docker run -d --name django-app -p 8001:8001 django-app'
             }
         }
     }
