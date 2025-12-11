@@ -14,7 +14,7 @@ pipeline {
         stage('deploy') {
             steps {
         	sh 'docker rm -f django-test-app || true'
-                sh 'docker run -d --name django-test-app -p 8001:8001 django-test-app'
+                sh 'docker run -d --name django-test-app -p 8010:8001 django-test-app'
             }
         }
     }
