@@ -23,5 +23,19 @@ pipeline {
                 echo 'Hello world!'
             }
         }
+	stage('migrate') {
+            steps {
+                sh 'python3 manage.py makemigrations'
+                sh 'python3 manage.py migrate'
+            }
+        }
+        stage('deploy') {
+            steps {
+                sh '''
+                    python3 manage.py collectstatic --noinput
+                    nohup python3 manage.py runserver 0.0.0.0:8001 > /dev/null 2>&1 &
+                '''
+            }
+        }
     }
 }
