@@ -35,7 +35,8 @@ pipeline {
 		    mkdir -p static
                     python3 manage.py collectstatic --noinput
 	            python3 manage.py migrate
-                    nohup python3 manage.py runserver 0.0.0.0:8001 > /dev/null 2>&1 &
+                    nohup python3 manage.py runserver 0.0.0.0:8001 > server.log 2>&1 &
+                    sleep 3
                 '''
             }
         }
