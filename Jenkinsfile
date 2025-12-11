@@ -29,14 +29,11 @@ pipeline {
                 sh 'python3 manage.py migrate'
             }
         }
-        stage('deploy') {
+        stage('run app') {
             steps {
                 sh '''
-		    pkill -f runserver || true
-                    sleep 3
-		    mkdir -p static
-                    python3 manage.py collectstatic --noinput
-	            nohup python3 manage.py runserver 0.0.0.0:8001 &
+		    python3 manage.py migrate
+                    python3 manage.py runserver 0.0.0.0:8001
                 '''
             }
         }
