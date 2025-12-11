@@ -9,8 +9,6 @@ pipeline {
         stage('tests') {
             steps {
                 sh 'docker run --rm django-app python -m coverage run --source=. manage.py test --verbosity=2'
-                sh 'docker run --rm django-app python -m coverage report'
-                sh 'docker run --rm django-app python -m coverage html'
             }
         }
         stage('deploy') {
