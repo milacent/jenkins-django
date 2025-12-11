@@ -32,6 +32,8 @@ pipeline {
         stage('deploy') {
             steps {
                 sh '''
+		    pkill -f runserver || true
+                    sleep 3
 		    mkdir -p static
                     python3 manage.py collectstatic --noinput
 	            python3 manage.py migrate
